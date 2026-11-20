@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aerox New 155 — Product Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <!-- Preload all motorcycle images -->
+  <link rel="preload" as="image" href="assets/images/nasgororeng-main.png"/>
+  <link rel="preload" as="image" href="assets/images/hlztt.png"/>
+  <link rel="preload" as="image" href="assets/images/engkolkkriuk.png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body data-theme="blue" class="loading-active">
+
+  <!-- ═══════════════ MINIMALIST MOTION LOADER ═══════════════ -->
+  <div class="simple-loader" id="simpleLoader">
+    <!-- Subtle Architectural Grid Lines (Figma motion style) -->
+    <div class="loader-grid-lines">
+      <div class="grid-line h-line top-h"></div>
+      <div class="grid-line h-line mid-h"></div>
+      <div class="grid-line h-line bot-h"></div>
+      <div class="grid-line v-line left-v"></div>
+      <div class="grid-line v-line right-v"></div>
+    </div>
+
+    <!-- Center Minimal Element -->
+    <div class="loader-center-box">
+      <div class="loader-brand-title">AEROX</div>
+      <!-- Thin Sleek Progress Line -->
+      <div class="loader-progress-track">
+        <div class="loader-progress-fill" id="loaderFill"></div>
+      </div>
+      <div class="loader-pct" id="loaderPct">0%</div>
+    </div>
+  </div>
+
+  <!-- Full page smooth linear gradient background -->
+  <div class="page-bg"></div>
+
+  <!-- Background Music: Autoplay & Loop (Tanpa tombol UI) -->
+  <audio id="bgMusic" src="assets/audio/music.mp3" loop preload="auto"></audio>
+
+  <!-- ═══════════════ MAIN DASHBOARD WRAPPER ═══════════════ -->
+  <div class="page-wrap" id="pageWrap">
+
+    <header class="top-bar stag-item stag-1">
+      <div class="top-logo">AEROX</div>
+      <div class="top-right">&copy; 2026 All rights reserved</div>
+    </header>
+
+    <!-- Product Card: Zooms in towards the camera -->
+    <main class="product-card zoom-card" id="productCard">
+
+      <!-- Dynamic Showcase Effects: Enhanced Aerodynamic Wind Flow (Tanpa Lingkaran & Tanpa Persegi) -->
+      <div class="focus-fx-backdrop" id="focusFxBackdrop" aria-hidden="true">
+        <div class="fx-aero-streak stream-1"></div>
+        <div class="fx-aero-streak stream-2"></div>
+        <div class="fx-aero-streak stream-3"></div>
+        <div class="fx-aero-streak stream-4"></div>
+        <div class="fx-aero-streak stream-5"></div>
+        <div class="fx-aero-streak stream-6"></div>
+        <div class="fx-aero-streak stream-7"></div>
+        <div class="fx-aero-streak stream-8"></div>
+        <div class="fx-aero-dash dash-1"></div>
+        <div class="fx-aero-dash dash-2"></div>
+        <div class="fx-aero-dash dash-3"></div>
+        <div class="fx-aero-dash dash-4"></div>
+      </div>
+
+      <nav class="card-nav stag-item stag-3">
+        <div class="card-nav-left">
+          <span class="card-nav-pill active">Products</span>
+          <span class="card-nav-pill">Contact</span>
+        </div>
+        <div class="card-nav-right">
+          <button class="card-icon-btn" aria-label="Profile">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </button>
+          <button class="card-icon-btn" aria-label="Cart">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.17 14.75l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0020 4.5H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7.42c-.14 0-.25-.11-.25-.25z"/></svg>
+          </button>
+          <button class="card-icon-btn" aria-label="Wishlist">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Urutan Pilihan Warna: Biru, Merah, Ungu -->
+      <div class="color-selectors stag-item stag-4" id="colorSelectors">
+        <button class="color-sel active" data-index="0">
+          <span class="color-dot blue-dot"></span> Blue
+        </button>
+        <button class="color-sel" data-index="1">
+          <span class="color-dot red-dot"></span> Red
+        </button>
+        <button class="color-sel" data-index="2">
+          <span class="color-dot purple-dot"></span> Purple
+        </button>
+      </div>
+
+      <div class="card-content">
+
+        <div class="card-info">
+          <p class="info-category stag-item stag-5">New</p>
+          <h1 class="info-title stag-item stag-6">Aerox New 155</h1>
+          <h2 class="info-color stag-item stag-7" id="infoColor">BLUE</h2>
+          <div class="info-tags stag-item stag-8">
+            <span class="info-tag">Performance</span>
+            <span class="info-tag">Sporty</span>
+            <span class="info-tag">Premium</span>
+          </div>
+          <div class="info-features stag-item stag-9">
+            <div class="info-feat-row"><span class="feat-dot"></span><span>155cc LC4V Engine</span></div>
+            <div class="info-feat-row"><span class="feat-dot"></span><span>Variable Valve Actuation</span></div>
+          </div>
+          <p class="info-year stag-item stag-10">2024 / 25 rg</p>
+          <p class="info-desc stag-item stag-11">Yamaha Aerox 155 hadir dengan desain sporty dan aerodinamis. Performa mesin yang responsif menjadikannya pilihan terbaik.</p>
+        </div>
+
+        <!-- Visual area: Free, smooth gradient spread with zero circular elements -->
+        <div class="card-visual stag-item stag-visual" id="cardVisual">
+          <!-- Label NASGORGORENG di atas motor biru -->
+          <div class="moto-label" id="motoLabel">NASGORGORENG</div>
+          <!-- Dual image layers for seamless slide transitions -->
+          <div class="moto-stage" id="motoStage">
+            <img src="assets/images/nasgororeng-main.png" alt="Aerox New 155 Blue" class="moto-img moto-current" id="motoCurrent" draggable="false"/>
+            <img src="" alt="" class="moto-img moto-next" id="motoNext" draggable="false"/>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-bottom stag-item stag-bottom">
+        <div class="bottom-left">
+          <button class="nav-arrow" id="arrowLeft" aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="nav-dots" id="navDots">
+            <span class="ndot active" data-i="0"></span>
+            <span class="ndot" data-i="1"></span>
+            <span class="ndot" data-i="2"></span>
+          </div>
+          <button class="nav-arrow" id="arrowRight" aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="bottom-right">
+          <button class="btn-explore">Explore</button>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="bottom-bar stag-item stag-footer">
+      <span>&copy; 2026 Aerox New 155 — Personal Collection</span>
+    </footer>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+

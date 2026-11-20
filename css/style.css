@@ -1,0 +1,1256 @@
+﻿/* ==========================================================
+   Aerox New 155 — Premium Product Showcase
+   Nike-inspired monochromatic dynamic color theme
+   Clean, smooth gradient from dark to bright for all colors:
+   1. BIRU (BLUE)
+   2. MERAH (RED)
+   3. UNGU (PURPLE)
+   
+   MINIMALIST MOTION LOADER & ZOOM-IN CARD TRANSITION
+   ========================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font: 'Inter', sans-serif;
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --radius: 24px;
+  --theme-transition: 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Default Theme: BIRU (BLUE) */
+  --bg-1: #051937;
+  --bg-2: #08295E;
+  --bg-3: #0D47A1;
+  --bg-4: #1565C0;
+  --bg-5: #1E88E5;
+  --bg-6: #42A5F5;
+
+  --card-1: #07224B;
+  --card-2: #0B3678;
+  --card-3: #1153B8;
+  --card-4: #1976D2;
+  --card-5: #2196F3;
+  --card-6: #64B5F6;
+
+  --text-on: #FFFFFF;
+  --text-on-soft: rgba(255,255,255,0.75);
+  --text-on-dim: rgba(255,255,255,0.4);
+  --accent: #BBDEFB;
+  --glow: rgba(21,101,192,0.45);
+  --dot-active: #FFFFFF;
+  --dot-inactive: rgba(255,255,255,0.3);
+  --btn-bg: rgba(255,255,255,0.18);
+  --btn-bg-hover: rgba(255,255,255,0.32);
+  --pill-bg: rgba(255,255,255,0.2);
+}
+
+/* ── 1. TEMA BIRU (BLUE) ── */
+[data-theme="blue"] {
+  --bg-1: #051937;
+  --bg-2: #08295E;
+  --bg-3: #0D47A1;
+  --bg-4: #1565C0;
+  --bg-5: #1E88E5;
+  --bg-6: #42A5F5;
+
+  --card-1: #07224B;
+  --card-2: #0B3678;
+  --card-3: #1153B8;
+  --card-4: #1976D2;
+  --card-5: #2196F3;
+  --card-6: #64B5F6;
+
+  --accent: #BBDEFB;
+  --glow: rgba(21,101,192,0.45);
+}
+
+/* ── 2. TEMA MERAH (RED) ── */
+[data-theme="red"] {
+  --bg-1: #4A0505;
+  --bg-2: #6E0B0B;
+  --bg-3: #991313;
+  --bg-4: #C21D1D;
+  --bg-5: #E53935;
+  --bg-6: #EF5350;
+
+  --card-1: #590707;
+  --card-2: #7D0E0E;
+  --card-3: #A81616;
+  --card-4: #CF2222;
+  --card-5: #EB3B3B;
+  --card-6: #F87171;
+
+  --accent: #FFCDD2;
+  --glow: rgba(183,28,28,0.45);
+}
+
+/* ── 3. TEMA UNGU (PURPLE) ── */
+[data-theme="purple"] {
+  --bg-1: #2A0442;
+  --bg-2: #430A66;
+  --bg-3: #6A1B9A;
+  --bg-4: #8E24AA;
+  --bg-5: #AB47BC;
+  --bg-6: #CE93D8;
+
+  --card-1: #370655;
+  --card-2: #520D7C;
+  --card-3: #7B1FA2;
+  --card-4: #9C27B0;
+  --card-5: #BA68C8;
+  --card-6: #E1BEE7;
+
+  --accent: #E1BEE7;
+  --glow: rgba(123,31,162,0.45);
+}
+
+html { height: 100%; }
+
+body {
+  font-family: var(--font);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-on);
+  position: relative;
+  background: #051937;
+}
+
+body.loading-active {
+  overflow: hidden;
+}
+
+/* ═════════════════════════════════════════════════════════
+   MINIMALIST MOTION LOADER (Figma Motion Reference 1)
+   Clean, Simple, Identical Blue Gradient as Dashboard
+═════════════════════════════════════════════════════════ */
+.simple-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #051937 0%, #08295E 20%, #0D47A1 45%, #1565C0 70%, #1E88E5 90%, #42A5F5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition:
+    opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Subtle Architectural Grid Lines from Reference 1 */
+.loader-grid-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.grid-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.h-line {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+.top-h { top: 22%; }
+.mid-h { top: 50%; background: rgba(255, 255, 255, 0.08); }
+.bot-h { top: 78%; }
+
+.v-line {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+.left-v { left: 24%; }
+.right-v { right: 24%; }
+
+/* Minimal Center Box */
+.loader-center-box {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.65rem;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s ease;
+}
+
+.loader-brand-title {
+  font-family: var(--font);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  color: #FFFFFF;
+  margin-left: 0.28em;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: simpleFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.45);
+}
+
+/* Thin Sleek Progress Line */
+.loader-progress-track {
+  position: relative;
+  width: 260px;
+  height: 2.5px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: 0.3rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: simpleFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+}
+
+.loader-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #1976D2 0%, #42A5F5 60%, #BBDEFB 100%);
+  border-radius: 100px;
+  box-shadow: 0 0 14px rgba(66, 165, 245, 0.9);
+  transition: width 0.08s linear;
+}
+
+.loader-pct {
+  font-family: var(--font);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.65);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: simpleFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+}
+
+@keyframes simpleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loader Fade Out / Disappear */
+.simple-loader.loader-closing {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
+.simple-loader.loader-hidden {
+  display: none !important;
+}
+
+/* ═════════════════════════════════════════════════════════
+   DASHBOARD ZOOM-IN TRANSITION (Reference Image 2)
+   "Ada kotak yang ngezoom mendekat"
+═════════════════════════════════════════════════════════ */
+.page-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 100vh;
+  padding: 1.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* 
+   The Product Card: Starts scaled down & zooms in towards camera 
+   exactly like the zooming card in Reference 2!
+*/
+.product-card.zoom-card {
+  width: 100%;
+  background: linear-gradient(140deg, var(--card-1) 0%, var(--card-2) 20%, var(--card-3) 45%, var(--card-4) 70%, var(--card-5) 90%, var(--card-6) 100%);
+  border-radius: var(--radius);
+  padding: 1.6rem 2.2rem 1.4rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.25),
+    0 0 90px var(--glow);
+  border: none;
+  outline: none;
+
+  /* Initial state: distant box */
+  opacity: 0;
+  transform: scale(0.68) translateY(35px);
+  filter: blur(12px);
+  transition:
+    opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+    background var(--theme-transition),
+    box-shadow var(--theme-transition);
+  will-change: transform, opacity, filter;
+}
+
+/* When Zoom Triggered: The box zooms close and crisply into view */
+.page-wrap.card-zoomed-in .product-card.zoom-card {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0px);
+}
+
+/* 
+   ELEGANT STAGGERED TEXTS:
+   "transisi teks yang muncul durasinya sedikit dilamakan agar terlihat elegant"
+   Duration: 1.05s with gentle glide
+*/
+.stag-item {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition:
+    opacity 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+/* Stagger Delays spaced out gracefully */
+.page-wrap.card-zoomed-in .stag-1 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.25s;
+}
+
+.page-wrap.card-zoomed-in .stag-3 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.35s;
+}
+
+.page-wrap.card-zoomed-in .stag-4 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.42s;
+}
+
+.page-wrap.card-zoomed-in .stag-5 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.48s;
+}
+
+.page-wrap.card-zoomed-in .stag-6 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.55s;
+}
+
+.page-wrap.card-zoomed-in .stag-7 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.62s;
+}
+
+.page-wrap.card-zoomed-in .stag-8 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.70s;
+}
+
+.page-wrap.card-zoomed-in .stag-9 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.78s;
+}
+
+.page-wrap.card-zoomed-in .stag-10 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.85s;
+}
+
+.page-wrap.card-zoomed-in .stag-11 {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.92s;
+}
+
+.page-wrap.card-zoomed-in .stag-visual {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.58s;
+}
+
+.page-wrap.card-zoomed-in .stag-bottom {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 0.98s;
+}
+
+.page-wrap.card-zoomed-in .stag-footer {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+  transition-delay: 1.08s;
+}
+
+/* ═════════════════════════════════════════════════════════
+   MOTORCYCLE FOCUS MODE: TEXTS FADE OUT SMOOTHLY & GRADUALLY
+   "jika motornya di click tuh motor membesar ke posisi tengah
+    dengan teks yang hilang smooth perlahan seperti teks muncul,
+    dan jika di click lagi motornya kembali ke posisi semula
+    dengan transisi teks sebelumnya muncul"
+═════════════════════════════════════════════════════════ */
+.page-wrap.moto-focused .stag-item:not(.stag-visual) {
+  opacity: 0 !important;
+  transform: translateY(22px) !important;
+  filter: blur(8px) !important;
+  pointer-events: none !important;
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.75s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Cascading disappearance so it fades out smoothly step by step */
+.page-wrap.moto-focused .stag-11 { transition-delay: 0.02s !important; }
+.page-wrap.moto-focused .stag-10 { transition-delay: 0.05s !important; }
+.page-wrap.moto-focused .stag-9  { transition-delay: 0.08s !important; }
+.page-wrap.moto-focused .stag-8  { transition-delay: 0.11s !important; }
+.page-wrap.moto-focused .stag-7  { transition-delay: 0.14s !important; }
+.page-wrap.moto-focused .stag-6  { transition-delay: 0.17s !important; }
+.page-wrap.moto-focused .stag-5  { transition-delay: 0.20s !important; }
+.page-wrap.moto-focused .stag-4  { transition-delay: 0.23s !important; }
+.page-wrap.moto-focused .stag-bottom { transition-delay: 0.12s !important; }
+.page-wrap.moto-focused .stag-3  { transition-delay: 0.26s !important; }
+.page-wrap.moto-focused .stag-1  { transition-delay: 0.29s !important; }
+.page-wrap.moto-focused .stag-footer { transition-delay: 0.24s !important; }
+
+.page-wrap.moto-focused .moto-label {
+  opacity: 0 !important;
+  transform: translateY(16px) !important;
+  filter: blur(8px) !important;
+  transition: opacity 0.55s ease, transform 0.55s ease, filter 0.55s ease !important;
+}
+
+/* ═════════════════════════════════════════════════════════
+   ENHANCED AERODYNAMIC WIND FLOW (ALIRAN ANGIN BERKECEPATAN TINGGI)
+   - Tanpa lingkaran & tanpa persegi panjang penutup
+   - Aliran angin aerodinamis berlapis (wind-tunnel flow)
+   - Halus, cepat, elegan, dan berada di belakang motor
+═════════════════════════════════════════════════════════ */
+.focus-fx-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.page-wrap.moto-focused .focus-fx-backdrop {
+  opacity: 1;
+}
+
+/* ── Garis Aliran Angin Aerodinamis (Long Aero Streaks) ── */
+.fx-aero-streak {
+  position: absolute;
+  height: 2px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 20%, rgba(255,255,255,0.7) 75%, #FFFFFF 96%, var(--accent) 100%);
+  box-shadow: 0 0 12px var(--accent), 0 0 20px var(--glow);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.fx-aero-streak.stream-1 {
+  top: 18%;
+  width: 320px;
+  height: 1.5px;
+  animation: aeroWindTunnel 2.3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.fx-aero-streak.stream-2 {
+  top: 28%;
+  width: 440px;
+  height: 2px;
+  animation: aeroWindTunnel 2.0s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.35s;
+}
+
+.fx-aero-streak.stream-3 {
+  top: 38%;
+  width: 290px;
+  height: 1.5px;
+  animation: aeroWindTunnel 2.6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 1.1s;
+}
+
+.fx-aero-streak.stream-4 {
+  top: 48%;
+  width: 520px;
+  height: 2.5px;
+  animation: aeroWindTunnel 1.9s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.15s;
+}
+
+.fx-aero-streak.stream-5 {
+  top: 58%;
+  width: 380px;
+  height: 2px;
+  animation: aeroWindTunnel 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.75s;
+}
+
+.fx-aero-streak.stream-6 {
+  top: 68%;
+  width: 420px;
+  height: 2px;
+  animation: aeroWindTunnel 2.1s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 1.4s;
+}
+
+.fx-aero-streak.stream-7 {
+  top: 78%;
+  width: 340px;
+  height: 1.5px;
+  animation: aeroWindTunnel 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.55s;
+}
+
+.fx-aero-streak.stream-8 {
+  top: 86%;
+  width: 460px;
+  height: 2px;
+  animation: aeroWindTunnel 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 1.25s;
+}
+
+/* ── Aliran Angin Cepat / Micro Wind Dashes ── */
+.fx-aero-dash {
+  position: absolute;
+  height: 1.5px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 40%, #FFFFFF 100%);
+  box-shadow: 0 0 10px #FFFFFF;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.fx-aero-dash.dash-1 {
+  top: 24%;
+  width: 140px;
+  animation: aeroDashFlow 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.2s;
+}
+
+.fx-aero-dash.dash-2 {
+  top: 42%;
+  width: 180px;
+  animation: aeroDashFlow 1.3s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.8s;
+}
+
+.fx-aero-dash.dash-3 {
+  top: 62%;
+  width: 150px;
+  animation: aeroDashFlow 1.5s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.45s;
+}
+
+.fx-aero-dash.dash-4 {
+  top: 80%;
+  width: 190px;
+  animation: aeroDashFlow 1.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 1.05s;
+}
+
+/* Animasi Meluncur Angin dari Kanan ke Kiri Mulus */
+@keyframes aeroWindTunnel {
+  0% {
+    transform: translateX(580px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-650px);
+    opacity: 0;
+  }
+}
+
+@keyframes aeroDashFlow {
+  0% {
+    transform: translateX(520px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.95;
+  }
+  75% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(-560px);
+    opacity: 0;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════
+   ENHANCED AERODYNAMIC WIND FLOW (ALIRAN ANGIN BERKECEPATAN TINGGI)
+   - Tanpa lingkaran & tanpa persegi panjang penutup
+   - Aliran angin aerodinamis berlapis (wind-tunnel flow)
+   - Halus, cepat, elegan, dan berada di belakang motor
+═════════════════════════════════════════════════════════ */
+.focus-fx-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.page-wrap.moto-focused .focus-fx-backdrop {
+  opacity: 1;
+}
+
+/* ── Garis Aliran Angin Aerodinamis (Long Aero Streaks) ── */
+.fx-aero-streak {
+  position: absolute;
+  height: 2px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 20%, rgba(255,255,255,0.7) 75%, #FFFFFF 96%, var(--accent) 100%);
+  box-shadow: 0 0 12px var(--accent), 0 0 20px var(--glow);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.fx-aero-streak.stream-1 {
+  top: 18%;
+  width: 320px;
+  height: 1.5px;
+  animation: aeroWindTunnel 2.3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.fx-aero-streak.stream-2 {
+  top: 28%;
+  width: 440px;
+  height: 2px;
+  animation: aeroWindTunnel 2.0s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.35s;
+}
+
+.fx-aero-streak.stream-3 {
+  top: 38%;
+  width: 290px;
+  height: 1.5px;
+  animation: aeroWindTunnel 2.6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 1.1s;
+}
+
+.fx-aero-streak.stream-4 {
+  top: 48%;
+  width: 520px;
+  height: 2.5px;
+  animation: aeroWindTunnel 1.9s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.15s;
+}
+
+.fx-aero-streak.stream-5 {
+  top: 58%;
+  width: 380px;
+  height: 2px;
+  animation: aeroWindTunnel 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.75s;
+}
+
+.fx-aero-streak.stream-6 {
+  top: 68%;
+  width: 420px;
+  height: 2px;
+  animation: aeroWindTunnel 2.1s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 1.4s;
+}
+
+.fx-aero-streak.stream-7 {
+  top: 78%;
+  width: 340px;
+  height: 1.5px;
+  animation: aeroWindTunnel 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.55s;
+}
+
+.fx-aero-streak.stream-8 {
+  top: 86%;
+  width: 460px;
+  height: 2px;
+  animation: aeroWindTunnel 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 1.25s;
+}
+
+/* ── Aliran Angin Cepat / Micro Wind Dashes ── */
+.fx-aero-dash {
+  position: absolute;
+  height: 1.5px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 40%, #FFFFFF 100%);
+  box-shadow: 0 0 10px #FFFFFF;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.fx-aero-dash.dash-1 {
+  top: 24%;
+  width: 140px;
+  animation: aeroDashFlow 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.2s;
+}
+
+.fx-aero-dash.dash-2 {
+  top: 42%;
+  width: 180px;
+  animation: aeroDashFlow 1.3s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.8s;
+}
+
+.fx-aero-dash.dash-3 {
+  top: 62%;
+  width: 150px;
+  animation: aeroDashFlow 1.5s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.45s;
+}
+
+.fx-aero-dash.dash-4 {
+  top: 80%;
+  width: 190px;
+  animation: aeroDashFlow 1.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 1.05s;
+}
+
+/* Animasi Meluncur Angin dari Kanan ke Kiri Mulus */
+@keyframes aeroWindTunnel {
+  0% {
+    transform: translateX(580px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-650px);
+    opacity: 0;
+  }
+}
+
+@keyframes aeroDashFlow {
+  0% {
+    transform: translateX(520px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.95;
+  }
+  75% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(-560px);
+    opacity: 0;
+  }
+}
+
+/* ══ PAGE BACKGROUND: Smooth Multi-Stop Linear Gradient (No Circles) ══ */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 20%, var(--bg-3) 45%, var(--bg-4) 70%, var(--bg-5) 90%, var(--bg-6) 100%);
+  transition: background var(--theme-transition);
+}
+
+/* ══ TOP BAR ══ */
+.top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+}
+.top-logo {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--text-on);
+  opacity: 0.95;
+}
+.top-right {
+  font-size: 0.65rem;
+  color: var(--text-on-soft);
+  letter-spacing: 0.05em;
+}
+
+/* ── CARD NAV ── */
+.card-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+.card-nav-left { display: flex; gap: 0.5rem; }
+.card-nav-pill {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.32rem 0.95rem;
+  border-radius: 100px;
+  color: var(--text-on);
+  background: var(--pill-bg);
+  cursor: pointer;
+  transition: background 0.25s, transform 0.2s var(--spring);
+}
+.card-nav-pill.active { background: rgba(255,255,255,0.35); }
+.card-nav-pill:hover { transform: scale(1.05); background: rgba(255,255,255,0.3); }
+
+.card-nav-right { display: flex; gap: 0.5rem; }
+.card-icon-btn {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--pill-bg);
+  color: var(--text-on);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s var(--spring);
+}
+.card-icon-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
+
+/* ── COLOR SELECTORS: BLUE -> RED -> PURPLE ── */
+.color-selectors {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+.color-sel {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-on-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+  letter-spacing: 0.05em;
+}
+.color-sel.active {
+  color: var(--text-on);
+  border-bottom-color: var(--text-on);
+}
+.color-sel:hover { color: var(--text-on); }
+.color-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.5);
+}
+.blue-dot   { background: #2196F3; }
+.red-dot    { background: #E53935; }
+.purple-dot { background: #9C27B0; }
+
+/* ── CARD CONTENT ── */
+.card-content {
+  display: grid;
+  grid-template-columns: 1fr 1.45fr;
+  gap: 1.5rem;
+  align-items: center;
+  min-height: 360px;
+}
+
+/* Left info */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-right: 0.5rem;
+  z-index: 2;
+}
+.info-category {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-on-soft);
+}
+.info-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.info-color {
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  transition: color var(--theme-transition);
+}
+.info-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+}
+.info-tag {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  background: var(--pill-bg);
+  color: var(--text-on);
+  transition: background var(--theme-transition);
+}
+.info-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+.info-feat-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-on-soft);
+}
+.feat-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  transition: background var(--theme-transition);
+}
+.info-year {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--text-on-dim);
+  letter-spacing: 0.08em;
+}
+.info-desc {
+  font-size: 0.68rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-on-soft);
+  max-width: 320px;
+}
+
+/* ── RIGHT VISUAL: INTERACTIVE MOTORCYCLE STAGE ── */
+.card-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  min-height: 350px;
+  border: none;
+  outline: none;
+  perspective: 1200px;
+}
+
+/* Dynamic label above bike (shown for Blue) */
+.moto-label {
+  position: relative;
+  z-index: 2;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--text-on);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  pointer-events: none;
+}
+.moto-label.hidden {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* Motor Stage: Interactive Container with Cursor and Perspective */
+.moto-stage {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 560px;
+  height: 290px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  will-change: transform;
+}
+
+/* 1. Visible Idle Floating Animation (only when not sliding and not focused) */
+.moto-stage:not(.sliding):not(.focused) {
+  animation: motoAliveFloat 4s ease-in-out infinite;
+}
+
+/* Focused State: Enlarged & Centered */
+.moto-stage.focused {
+  transform: translate3d(var(--focus-tx, 0px), var(--focus-ty, 0px), 0) scale(var(--focus-scale, 1.42)) !important;
+  z-index: 50;
+  filter: drop-shadow(0 38px 75px rgba(0,0,0,0.52)) !important;
+}
+
+/* 6. Live Breathing Suspension for Focused Motorcycle (Motor Hidup Bergerak) */
+.moto-stage.focused .moto-current {
+  animation: focusedMotoFloat 4s ease-in-out infinite !important;
+}
+
+@keyframes focusedMotoFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    filter: drop-shadow(0 32px 55px rgba(0,0,0,0.44));
+  }
+  30% {
+    transform: translateY(-9px) rotate(-0.6deg);
+    filter: drop-shadow(0 45px 75px rgba(0,0,0,0.55));
+  }
+  65% {
+    transform: translateY(5px) rotate(0.4deg);
+    filter: drop-shadow(0 26px 45px rgba(0,0,0,0.36));
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    filter: drop-shadow(0 32px 55px rgba(0,0,0,0.44));
+  }
+}
+
+/* 6. Live Breathing Suspension for Focused Motorcycle (Motor Hidup Bergerak) */
+.moto-stage.focused .moto-current {
+  animation: focusedMotoFloat 4s ease-in-out infinite !important;
+}
+
+@keyframes focusedMotoFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    filter: drop-shadow(0 32px 55px rgba(0,0,0,0.44));
+  }
+  30% {
+    transform: translateY(-9px) rotate(-0.6deg);
+    filter: drop-shadow(0 45px 75px rgba(0,0,0,0.55));
+  }
+  65% {
+    transform: translateY(5px) rotate(0.4deg);
+    filter: drop-shadow(0 26px 45px rgba(0,0,0,0.36));
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    filter: drop-shadow(0 32px 55px rgba(0,0,0,0.44));
+  }
+}
+
+@keyframes motoAliveFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-9px) rotate(-0.8deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(0.4deg);
+  }
+  75% {
+    transform: translateY(-11px) rotate(-0.5deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+/* 2. Hover Interaction */
+.moto-stage:hover {
+  filter: drop-shadow(0 28px 50px rgba(0,0,0,0.36));
+}
+
+/* 3. Click / Select Animation */
+.moto-stage.selected {
+  animation: motoSelectPulse 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+}
+
+@keyframes motoSelectPulse {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  20% {
+    transform: scale(0.94) translateY(6px) rotate(1deg);
+  }
+  45% {
+    transform: scale(1.09) translateY(-16px) rotate(-2deg);
+    filter: drop-shadow(0 32px 55px rgba(0,0,0,0.42)) brightness(1.1);
+  }
+  75% {
+    transform: scale(1.02) translateY(-4px) rotate(0.5deg);
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+/* Ripple shockwave on click */
+.select-flash {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0.2);
+  pointer-events: none;
+  z-index: 2;
+  animation: rippleExpand 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes rippleExpand {
+  0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0; }
+}
+
+.moto-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.28));
+  will-change: transform, opacity;
+  pointer-events: none;
+  transition: filter 0.3s ease;
+}
+
+/* Current active image */
+.moto-current {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 3;
+}
+
+/* Next incoming image */
+.moto-next {
+  opacity: 0;
+  transform: translateX(0);
+  z-index: 4;
+}
+
+/* ── CARD BOTTOM ── */
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+  z-index: 4;
+}
+.bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.nav-arrow {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.28);
+  background: transparent;
+  color: var(--text-on);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--spring);
+}
+.nav-arrow:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.6);
+  transform: scale(1.1);
+}
+.nav-arrow:active { transform: scale(0.92); }
+.nav-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.ndot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--dot-inactive);
+  cursor: pointer;
+  transition: all 0.3s var(--spring);
+}
+.ndot.active {
+  background: var(--dot-active);
+  transform: scale(1.35);
+  box-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+.ndot:hover:not(.active) { background: rgba(255,255,255,0.5); transform: scale(1.15); }
+
+.btn-explore {
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-on);
+  background: var(--btn-bg);
+  border: 1.5px solid rgba(255,255,255,0.28);
+  border-radius: 10px;
+  padding: 0.58rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.25s var(--spring);
+}
+.btn-explore:hover {
+  background: var(--btn-bg-hover);
+  border-color: rgba(255,255,255,0.55);
+  transform: scale(1.05);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+}
+
+/* ── BOTTOM BAR ── */
+.bottom-bar {
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem 0;
+  font-size: 0.6rem;
+  color: var(--text-on-soft);
+  letter-spacing: 0.05em;
+}
+
+/* ══════════════ TRANSITIONS for smooth theme sync ══════════════ */
+body, .page-bg, .info-color, .info-tag,
+.feat-dot, .ndot, .nav-arrow, .btn-explore, .card-nav-pill,
+.card-icon-btn, .color-sel {
+  transition-property: background, color, border-color, box-shadow;
+  transition-duration: 0.65s;
+  transition-timing-function: var(--ease-smooth);
+}
+
+/* ══════════════ RESPONSIVE ══════════════ */
+@media (max-width: 860px) {
+  .page-wrap { padding: 1rem; }
+  .product-card.zoom-card { padding: 1.2rem 1.6rem 1rem; }
+  .card-content {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .card-info { padding-right: 0; order: 2; }
+  .card-visual { order: 1; min-height: 280px; }
+  .moto-stage { height: 240px; max-width: 440px; }
+  .card-nav-right { display: none; }
+}
+@media (max-width: 520px) {
+  .product-card.zoom-card { padding: 1rem; border-radius: 18px; }
+  .color-selectors { gap: 0.8rem; }
+  .card-bottom { flex-direction: column; gap: 0.85rem; }
+  .moto-stage { height: 200px; }
+  .top-right { display: none; }
+}
+
+
+
